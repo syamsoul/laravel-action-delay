@@ -1,6 +1,6 @@
 {
     "name": "syamsoul/laravel-action-delay",
-    "description": "Delay a Job, Database Query or PHP code at a specific time easily with one simple command.",
+    "description": "Delay a Job, Database Query or PHP code at a specific datetime easily with one simple command.",
     "type": "laravel-package",
     "license": "MIT",
     "autoload": {

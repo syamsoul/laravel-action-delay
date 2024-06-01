@@ -1,21 +1,20 @@
-# Env Variable Setter for Laravel
+# Action Delay for Laravel
 
 
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/syamsoul/laravel-set-env.svg?style=flat-square)](https://packagist.org/packages/syamsoul/laravel-set-env)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/syamsoul/laravel-action-delay.svg?style=flat-square)](https://packagist.org/packages/syamsoul/laravel-action-delay)
 
 
 &nbsp;
 ## Introduction
 
-This package allows you to programmatically set environment variable into `.env` file.
+This package allows you to delay an action (Jobs, Database Query or even PHP Code) at specific datetime with a simple command.
 
 
 &nbsp;
 * [Requirement](#requirement)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Example](#example)
 
 
 &nbsp;
@@ -30,71 +29,22 @@ This package allows you to programmatically set environment variable into `.env`
 ## Installation
 
 
-This package can be used in Laravel 9.x or higher. If you are using an older version of Laravel, there's might be some problem. If there's any problem, you can [create new issue](https://github.com/syamsoul/laravel-set-env/issues) and I will fix it as soon as possible.
+This package can be used in Laravel 10.x or higher. If you are using an older version of Laravel, there's might be some problem. If there's any problem, you can [create new issue](https://github.com/syamsoul/laravel-action-delay/issues) and I will fix it as soon as possible.
 
 You can install the package via composer:
 
 ``` bash
-composer require syamsoul/laravel-set-env
+composer require syamsoul/laravel-action-delay
 ```
 
 &nbsp;
 &nbsp;
 ## Usage
 
-First, you must add this line to import `Env` service.
-```php
-use SoulDoit\SetEnv\Env;
-```
-
-
-&nbsp;
-### Set New Variable or Update Existing Variable
-
-
-To set/update environment variable in `.env` file, just simply use the `set` method.
-```php
-$envService = new Env(); 
-$envService->set("MY_APP_NAME", "My Laravel Application");
-
-// or set variable in .env.example file
-$envService = new Env('.env.example');
-$envService->set("MY_APP_NAME", "Localhost");
-```
-
-&nbsp;
-
-or you can set/update the environment variable via `Artisan` command.
+You can delay an action via `Artisan` command.
 ``` bash
-php artisan souldoit:set-env
+php artisan souldoit:action-delay
 ```
-
-or
-
-``` bash
-php artisan souldoit:set-env "MY_APP_NAME=My Laravel Application"
-```
-
-or, set variable in .env.example file
-
-``` bash
-php artisan souldoit:set-env "MY_APP_NAME=Localhost" -E .env.example
-
-#or
-
-php artisan souldoit:set-env "MY_APP_NAME=Localhost" --env_file_path=.env.example
-```
-
-&nbsp;
-### Get Variable's Value
-
-To get environment variable in `.env` file, just simply use the `get` method.
-```php
-$envService = new Env(); 
-$the_value = $envService->get("MY_APP_NAME");
-// $the_value will return `My Laravel Application`
-```
-
 
 &nbsp;
 &nbsp;
