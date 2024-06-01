@@ -8,7 +8,7 @@
 &nbsp;
 ## Introduction
 
-This package allows you to delay an action (Jobs, Database Query or even PHP Code) at specific datetime with a simple command.
+This package allows you to delay an action (Jobs, Database Query, PHP Code or External Process) at specific datetime with a simple command.
 
 
 &nbsp;
