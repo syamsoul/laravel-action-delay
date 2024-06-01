@@ -15,9 +15,12 @@
         }
     ],
     "require": {
-        "illuminate/support": "^10.4",
+        "haydenpierce/class-finder": "^0.5.3",
+        "illuminate/bus": "^10.4",
         "illuminate/console": "^10.4",
-        "haydenpierce/class-finder": "^0.5.3"
+        "illuminate/contracts": "^10.4",
+        "illuminate/support": "^10.4",
+        "illuminate/queue": "^10.4"
     },
     "extra": {
         "laravel": {

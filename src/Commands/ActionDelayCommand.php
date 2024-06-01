@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use HaydenPierce\ClassFinder\ClassFinder;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
+use SoulDoit\ActionDelay\Jobs\DatabaseQueryJob;
 use ReflectionClass;
 
 class ActionDelayCommand extends Command
@@ -31,7 +32,7 @@ class ActionDelayCommand extends Command
     {
         $action_choices = [
             1 => 'Laravel Jobs',
-            // 2 => 'Database Query',
+            2 => 'Database Query',
         ];
 
         $action = array_flip($action_choices)[$this->choice("What action you want to delay?", $action_choices, 1, 1)];
@@ -77,7 +78,7 @@ class ActionDelayCommand extends Command
             $this->components->error("Something's wrong.");
         }
 
-        $datetime_string = $this->ask("What time to execute (in " . config('app.timezone') . " time, format:Y-m-d H:i:s):");
+        $datetime_string = $this->ask("What time to execute (in " . config('app.timezone') . " time, format:Y-m-d H:i:s)");
 
         $validator = Validator::make(['datetime_string' => $datetime_string], [
             'datetime_string' => ['required', 'date_format:Y-m-d H:i:s'],
@@ -91,10 +92,9 @@ class ActionDelayCommand extends Command
         if ($action === 1) {
             ($job)::dispatch(...$param_values)->delay(Carbon::parse($datetime_string));
         } else if ($action === 2) {
-            // DatabaseQueryJob::dispatch($query)->delay(Carbon::parse($datetime_string));
+            DatabaseQueryJob::dispatch($query)->delay(Carbon::parse($datetime_string));
         } else {
             $this->components->error("Something's wrong.");
         }
     }
 }
-
