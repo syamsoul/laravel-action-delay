@@ -8,8 +8,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Process;
 
-class PhpCodeJob implements ShouldQueue
+class ExternalProcessJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -17,7 +18,8 @@ class PhpCodeJob implements ShouldQueue
      * Create a new job instance.
      */
     public function __construct(
-        private string $code,
+        private string $command,
+        private int $timeout = 600, // NOTE: in seconds
     ) {
         // $this->queue = 'high';
     }
@@ -27,6 +29,6 @@ class PhpCodeJob implements ShouldQueue
      */
     public function handle(): void
     {
-        eval("$this->code;");
+        Process::timeout($this->timeout)->run($this->command);
     }
 }
