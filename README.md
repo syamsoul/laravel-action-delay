@@ -15,6 +15,7 @@ This package allows you to delay an action (Jobs, Database Query or even PHP Cod
 * [Requirement](#requirement)
 * [Installation](#installation)
 * [Usage](#usage)
+* [Example](#example)
 
 
 &nbsp;
@@ -44,6 +45,24 @@ composer require syamsoul/laravel-action-delay
 You can delay an action via `Artisan` command.
 ``` bash
 php artisan souldoit:action-delay
+```
+
+&nbsp;
+&nbsp;
+## Example
+
+#### 1. Delay Database Query
+```bash
+What action you want to delay? [Laravel Jobs]:
+  [1] Laravel Jobs
+  [2] Database Query
+ > 2
+
+ Enter MySQL query:
+ > UPDATE `users` SET `updated_at`=NOW() WHERE `id`=1
+
+ What time to execute (in UTC time, format:Y-m-d H:i:s):
+ > 2024-06-01 08:30:35
 ```
 
 &nbsp;
