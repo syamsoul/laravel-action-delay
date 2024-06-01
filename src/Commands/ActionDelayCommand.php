@@ -5,6 +5,7 @@ namespace SoulDoit\ActionDelay\Commands;
 use Illuminate\Console\Command;
 use HaydenPierce\ClassFinder\ClassFinder;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Carbon;
 use ReflectionClass;
 
 class ActionDelayCommand extends Command
