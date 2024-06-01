@@ -7,6 +7,7 @@ use HaydenPierce\ClassFinder\ClassFinder;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
 use SoulDoit\ActionDelay\Jobs\DatabaseQueryJob;
+use SoulDoit\ActionDelay\Jobs\PhpCodeJob;
 use ReflectionClass;
 
 class ActionDelayCommand extends Command
@@ -33,6 +34,7 @@ class ActionDelayCommand extends Command
         $action_choices = [
             1 => 'Laravel Jobs',
             2 => 'Database Query',
+            3 => 'PHP Code',
         ];
 
         $action = array_flip($action_choices)[$this->choice("What action you want to delay?", $action_choices, 1, 1)];
@@ -74,6 +76,8 @@ class ActionDelayCommand extends Command
             }
         } else if ($action === 2) {
             $query = $this->ask("Enter MySQL query");
+        } else if ($action === 3) {
+            $code = $this->ask("Enter PHP code");
         } else {
             $this->components->error("Something's wrong.");
         }
@@ -93,6 +97,8 @@ class ActionDelayCommand extends Command
             ($job)::dispatch(...$param_values)->delay(Carbon::parse($datetime_string));
         } else if ($action === 2) {
             DatabaseQueryJob::dispatch($query)->delay(Carbon::parse($datetime_string));
+        } else if ($action === 3) {
+            PhpCodeJob::dispatch($code)->delay(Carbon::parse($datetime_string));
         } else {
             $this->components->error("Something's wrong.");
         }
