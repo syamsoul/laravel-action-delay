@@ -57,6 +57,7 @@ What action you want to delay? [Laravel Jobs]:
   [1] Laravel Jobs
   [2] Database Query
   [3] PHP Code
+  [4] External Process
  > 2
 
  Enter MySQL query:
@@ -66,16 +67,38 @@ What action you want to delay? [Laravel Jobs]:
  > 2024-06-01 08:30:35
 ```
 
+&nbsp;
 #### 2. Delay PHP Code
 ```bash
 What action you want to delay? [Laravel Jobs]:
   [1] Laravel Jobs
   [2] Database Query
   [3] PHP Code
+  [4] External Process
  > 3
 
  Enter PHP code:
  > \App\Models\Variable::where('_key', 'maintainance_mode_enabled')->update(['_value' => 'false']); \App\Models\Variable::where('_key', 'new_feature_enabled')->update(['_value' => 'true']);
+
+ What time to execute (in UTC time, format:Y-m-d H:i:s):
+ > 2024-06-01 08:30:35
+```
+
+&nbsp;
+#### 3. Delay External Process
+```bash
+What action you want to delay? [Laravel Jobs]:
+  [1] Laravel Jobs
+  [2] Database Query
+  [3] PHP Code
+  [4] External Process
+ > 4
+
+ Enter command:
+ > sh deploy
+
+ Process timeout [600]: #default is 600 seconds, enter to choose default value
+ >
 
  What time to execute (in UTC time, format:Y-m-d H:i:s):
  > 2024-06-01 08:30:35
