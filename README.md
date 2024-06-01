@@ -56,10 +56,26 @@ php artisan souldoit:action-delay
 What action you want to delay? [Laravel Jobs]:
   [1] Laravel Jobs
   [2] Database Query
+  [3] PHP Code
  > 2
 
  Enter MySQL query:
- > UPDATE `users` SET `updated_at`=NOW() WHERE `id`=1
+ > UPDATE `variables` SET `_value`='false' WHERE `_key`='maintainance_mode_enabled'
+
+ What time to execute (in UTC time, format:Y-m-d H:i:s):
+ > 2024-06-01 08:30:35
+```
+
+#### 2. Delay PHP Code
+```bash
+What action you want to delay? [Laravel Jobs]:
+  [1] Laravel Jobs
+  [2] Database Query
+  [3] PHP Code
+ > 3
+
+ Enter PHP code:
+ > \App\Models\Variable::where('_key', 'maintainance_mode_enabled')->update(['_value' => 'false']); \App\Models\Variable::where('_key', 'new_feature_enabled')->update(['_value' => 'true']);
 
  What time to execute (in UTC time, format:Y-m-d H:i:s):
  > 2024-06-01 08:30:35
