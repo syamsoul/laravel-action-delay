@@ -75,6 +75,7 @@ php artisan souldoit:action-delay
  > 2024-06-01 10:16:0
 ```
 
+&nbsp;
 #### 2. Delay Database Query
 ```bash
  What action you want to delay? [Laravel Jobs]:
