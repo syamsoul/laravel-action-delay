@@ -1,0 +1,29 @@
+{
+    "name": "syamsoul/laravel-action-delay",
+    "description": "Delay a Job, Database Query or PHP code at a specific time easily with one simple command.",
+    "type": "laravel-package",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "SoulDoit\\ActionDelay\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Syamsoul Azrien",
+            "email": "syamsoulazrien88@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^10.4",
+        "illuminate/console": "^10.4",
+        "haydenpierce/class-finder": "^0.5.3"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SoulDoit\\ActionDelay\\Providers\\ActionDelayServiceProvider"
+            ]
+        }
+    }
+}
