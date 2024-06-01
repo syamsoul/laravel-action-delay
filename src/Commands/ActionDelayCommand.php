@@ -70,10 +70,13 @@ class ActionDelayCommand extends Command
 
                 $param_value = $this->ask("Please insert #" . ($key + 1) . " parameter: `$jc_param->name` (Type: $type_hint_name)");
 
-                if (count($type_hint_name_arr) === 1 && $type_hint_name_arr[0] === 'string') {
-                    array_push($param_values, $param_value);
-                } else {
+                if (count(array_diff($type_hint_name_arr, ["string", "null"])) > 0) {
                     array_push($param_values, eval("return $param_value;"));
+                } else {
+                    if (in_array("null", $type_hint_name_arr)) {
+                        if (empty($param_value)) $param_value = null;
+                    }
+                    array_push($param_values, $param_value);
                 }
             }
         } else if ($action === 2) {

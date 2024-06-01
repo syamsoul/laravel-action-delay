@@ -51,9 +51,33 @@ php artisan souldoit:action-delay
 &nbsp;
 ## Example
 
-#### 1. Delay Database Query
+#### 1. Delay Laravel Jobs
 ```bash
-What action you want to delay? [Laravel Jobs]:
+ What action you want to delay? [Laravel Jobs]:
+  [1] Laravel Jobs
+  [2] Database Query
+  [3] PHP Code
+  [4] External Process
+ > 1
+
+ What job you want to delay? [App\Jobs\GenerateCertificate]:
+  [1] App\Jobs\GenerateCertificate
+  [2] App\Jobs\SendCongratulationsEmail
+ > 2
+
+ Please insert #1 parameter: `user` (Type: App\Models\User):
+ > \App\Models\User::find(1)
+
+ Please insert #2 parameter: `text` (Type: string):
+ > Congratulations on your success!
+
+ What time to execute (in UTC time, format:Y-m-d H:i:s):
+ > 2024-06-01 10:16:0
+```
+
+#### 2. Delay Database Query
+```bash
+ What action you want to delay? [Laravel Jobs]:
   [1] Laravel Jobs
   [2] Database Query
   [3] PHP Code
@@ -68,9 +92,9 @@ What action you want to delay? [Laravel Jobs]:
 ```
 
 &nbsp;
-#### 2. Delay PHP Code
+#### 3. Delay PHP Code
 ```bash
-What action you want to delay? [Laravel Jobs]:
+ What action you want to delay? [Laravel Jobs]:
   [1] Laravel Jobs
   [2] Database Query
   [3] PHP Code
@@ -85,9 +109,9 @@ What action you want to delay? [Laravel Jobs]:
 ```
 
 &nbsp;
-#### 3. Delay External Process
+#### 4. Delay External Process
 ```bash
-What action you want to delay? [Laravel Jobs]:
+ What action you want to delay? [Laravel Jobs]:
   [1] Laravel Jobs
   [2] Database Query
   [3] PHP Code
