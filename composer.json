@@ -2,6 +2,18 @@
     "name": "syamsoul/laravel-action-delay",
     "description": "Delay a Job, Database Query or PHP code at a specific datetime easily with one simple command.",
     "type": "laravel-package",
+    "keywords": [
+        "syamsoul",
+        "laravel",
+        "action",
+        "delay",
+        "job",
+        "database",
+        "command",
+        "artisan",
+        "php",
+        "souldoit"
+    ],
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -15,6 +27,7 @@
         }
     ],
     "require": {
+        "php": ">=8.0.0",
         "haydenpierce/class-finder": "^0.5.3",
         "illuminate/bus": "^10.0|^11.0",
         "illuminate/console": "^10.0|^11.0",
