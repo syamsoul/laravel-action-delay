@@ -72,7 +72,7 @@ php artisan souldoit:action-delay
  > Congratulations on your success!
 
  What time to execute (in UTC time, format:Y-m-d H:i:s):
- > 2024-06-01 10:16:0
+ > 2024-06-01 10:16:00
 ```
 
 &nbsp;
