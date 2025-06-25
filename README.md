@@ -142,22 +142,22 @@ You can also delay actions using single-line commands without any interactive pr
 
 #### 1. Delay Laravel Jobs
 ```bash
-php artisan souldoit:action-delay --action=1 --job=\\SoulDoit\\ActionDelay\\Jobs\\ExternalProcessJob --job-parameter="touch newfile.txt" --delay-time="2025-06-25 16:25:00"
+php artisan souldoit:action-delay --action=1 --job=\\SoulDoit\\ActionDelay\\Jobs\\ExternalProcessJob --job-parameter="touch newfile.txt" --delay-at="2025-06-25 16:25:00"
 ```
 
 #### 2. Delay Database Query
 ```bash
-php artisan souldoit:action-delay --action=2 --db-query="INSERT INTO \`users\` (\`username\`,\`email\`,\`first_name\`,\`last_name\`,\`created_at\`,\`updated_at\`) VALUES ('user01','user01@gmail.com','User','One',NOW(),NOW())" --delay-time="2025-06-25 15:51:25"
+php artisan souldoit:action-delay --action=2 --db-query="INSERT INTO \`users\` (\`username\`,\`email\`,\`first_name\`,\`last_name\`,\`created_at\`,\`updated_at\`) VALUES ('user01','user01@gmail.com','User','One',NOW(),NOW())" --delay-at="2025-06-25 15:51:25"
 ```
 
 #### 3. Delay PHP Code
 ```bash
-php artisan souldoit:action-delay --action=3 --php-code="\DB::table('users')->insert(['username'=>'user02', 'email'=>'user02@gmail.com', 'first_name'=>'User', 'last_name'=>'Two', 'updated_at'=>now(), 'created_at'=>now()])" --delay-time="2025-06-25 16:32:00"
+php artisan souldoit:action-delay --action=3 --php-code="\DB::table('users')->insert(['username'=>'user02', 'email'=>'user02@gmail.com', 'first_name'=>'User', 'last_name'=>'Two', 'updated_at'=>now(), 'created_at'=>now()])" --delay-at="2025-06-25 16:32:00"
 ```
 
 #### 4. Delay External Process
 ```bash
-php artisan souldoit:action-delay --action=4 --command="php artisan down" --command-timeout=600 --delay-time="2025-06-25 16:37:50"
+php artisan souldoit:action-delay --action=4 --command="php artisan down" --command-timeout=600 --delay-at="2025-06-25 16:37:50"
 ```
 
 **Available Options:**
@@ -168,7 +168,8 @@ php artisan souldoit:action-delay --action=4 --command="php artisan down" --comm
 - `--php-code`: PHP code to execute (for action=3)
 - `--command`: Command to execute (for action=4)
 - `--command-timeout`: Process timeout in seconds (for action=4, default: 600)
-- `--delay-time`: Execution time in UTC (format: Y-m-d H:i:s)
+- `--delay-seconds`: Delay execution by specified number of seconds from current time
+- `--delay-at`: Execution at specific date & time in UTC (format: Y-m-d H:i:s)
 
 &nbsp;
 &nbsp;

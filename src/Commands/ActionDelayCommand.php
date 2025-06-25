@@ -18,7 +18,7 @@ class ActionDelayCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'souldoit:action-delay {--action=} {--job=} {--job-parameter=*} {--db-query=} {--php-code=} {--command=} {--command-timeout=} {--delay-time=}';
+    protected $signature = 'souldoit:action-delay {--action=} {--job=} {--job-parameter=*} {--db-query=} {--php-code=} {--command=} {--command-timeout=} {--delay-at=} {--delay-seconds=}';
 
     /**
      * The console command description.
@@ -39,7 +39,13 @@ class ActionDelayCommand extends Command
         $phpCodeCmd = $this->option('php-code');
         $commandCmd = $this->option('command');
         $commandTimeoutCmd = $this->option('command-timeout');
-        $delayTimeCmd = $this->option('delay-time');
+        $delayAtCmd = $this->option('delay-at');
+        $delaySecondsCmd = $this->option('delay-seconds');
+
+        if (!empty($delayAtCmd) && !empty($delaySecondsCmd)) {
+            $this->components->error("You can't use both --delay-at and --delay-seconds at the same time.");
+            return;
+        }
 
         $action_choices = [
             1 => 'Laravel Jobs',
@@ -113,25 +119,49 @@ class ActionDelayCommand extends Command
             $this->components->error("Something's wrong.");
         }
 
-        $datetime_string = !empty($delayTimeCmd) ? $delayTimeCmd : $this->ask("What time to execute (in " . config('app.timezone') . " time, format:Y-m-d H:i:s)");
+        if (empty($delayAtCmd) && empty($delaySecondsCmd)) {
+            $delay_choices = [
+                1 => 'Seconds',
+                2 => 'Specific Date & Time',
+            ];
+    
+            $delayType = array_flip($delay_choices)[$this->choice("How do you want to delay this action?", $delay_choices, 1, 1)];
+        } else {
+            $delayType = !empty($delayAtCmd) ? 2 : 1;
+        }
 
-        $validator = Validator::make(['datetime_string' => $datetime_string], [
-            'datetime_string' => ['required', 'date_format:Y-m-d H:i:s'],
-        ]);
+        if ($delayType === 1) {
+            $delaySeconds = intval(!empty($delaySecondsCmd) ? $delaySecondsCmd : $this->ask("How many seconds to delay?"));
 
-        if ($validator->fails()) {
-            $this->components->error($validator->errors()->first());
-            return;
+            if (empty($delaySeconds)) {
+                $this->components->error("You must enter a valid number of seconds.");
+                return;
+            }
+
+            $carbonDateTime = Carbon::now()->addSeconds($delaySeconds);
+        } else {
+            $datetime_string = !empty($delayTimeCmd) ? $delayTimeCmd : $this->ask("What time to execute (in " . config('app.timezone') . " time, format:Y-m-d H:i:s)");
+
+            $validator = Validator::make(['datetime_string' => $datetime_string], [
+                'datetime_string' => ['required', 'date_format:Y-m-d H:i:s'],
+            ]);
+
+            if ($validator->fails()) {
+                $this->components->error($validator->errors()->first());
+                return;
+            }
+
+            $carbonDateTime = Carbon::parse($datetime_string);
         }
 
         if ($action === 1) {
-            ($job)::dispatch(...$param_values)->delay(Carbon::parse($datetime_string));
+            ($job)::dispatch(...$param_values)->delay($carbonDateTime);
         } else if ($action === 2) {
-            DatabaseQueryJob::dispatch($query)->delay(Carbon::parse($datetime_string));
+            DatabaseQueryJob::dispatch($query)->delay($carbonDateTime);
         } else if ($action === 3) {
-            PhpCodeJob::dispatch($code)->delay(Carbon::parse($datetime_string));
+            PhpCodeJob::dispatch($code)->delay($carbonDateTime);
         } else if ($action === 4) {
-            ExternalProcessJob::dispatch($command, $timeout)->delay(Carbon::parse($datetime_string));
+            ExternalProcessJob::dispatch($command, $timeout)->delay($carbonDateTime);
         } else {
             $this->components->error("Something's wrong.");
         }
