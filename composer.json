@@ -29,11 +29,11 @@
     "require": {
         "php": ">=8.0.0",
         "haydenpierce/class-finder": "^0.5.3",
-        "illuminate/bus": "^10.0|^11.0",
-        "illuminate/console": "^10.0|^11.0",
-        "illuminate/contracts": "^10.0|^11.0",
-        "illuminate/support": "^10.0|^11.0",
-        "illuminate/queue": "^10.0|^11.0"
+        "illuminate/bus": "^10.0|^11.0|^12.0",
+        "illuminate/console": "^10.0|^11.0|^12.0",
+        "illuminate/contracts": "^10.0|^11.0|^12.0",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "illuminate/queue": "^10.0|^11.0|^12.0"
     },
     "extra": {
         "laravel": {
