@@ -56,7 +56,7 @@ php artisan souldoit:action-delay
 &nbsp;
 ## Single-Line Commands (No Prompts)
 
-You can also delay actions using single-line commands without any interactive prompts. This is useful for automation, scripts, or when you want to schedule actions programmatically.
+You can delay actions using single-line commands without any interactive prompts. This is useful for automation, scripts, or when you want to schedule actions programmatically.
 
 #### 1. Delay Laravel Jobs
 ```bash
