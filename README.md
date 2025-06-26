@@ -19,8 +19,8 @@ This package allows you to delay an action (Jobs, Database Query, PHP Code or Ex
 * [Requirement](#requirement)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Example](#example)
 * [Single-Line Commands (No Prompts)](#single-line-commands-no-prompts)
+* [Interactive Prompts](#interactive-prompts)
 
 
 &nbsp;
@@ -54,7 +54,45 @@ php artisan souldoit:action-delay
 
 &nbsp;
 &nbsp;
-## Example
+## Single-Line Commands (No Prompts)
+
+You can also delay actions using single-line commands without any interactive prompts. This is useful for automation, scripts, or when you want to schedule actions programmatically.
+
+#### 1. Delay Laravel Jobs
+```bash
+php artisan souldoit:action-delay --action=1 --job=\\SoulDoit\\ActionDelay\\Jobs\\ExternalProcessJob --job-parameter="touch newfile.txt" --delay-at="2025-06-25 16:25:00"
+```
+
+#### 2. Delay Database Query
+```bash
+php artisan souldoit:action-delay --action=2 --db-query="INSERT INTO \`users\` (\`username\`,\`email\`,\`first_name\`,\`last_name\`,\`created_at\`,\`updated_at\`) VALUES ('user01','user01@gmail.com','User','One',NOW(),NOW())" --delay-at="2025-06-25 15:51:25"
+```
+
+#### 3. Delay PHP Code
+```bash
+php artisan souldoit:action-delay --action=3 --php-code="\DB::table('users')->insert(['username'=>'user02', 'email'=>'user02@gmail.com', 'first_name'=>'User', 'last_name'=>'Two', 'updated_at'=>now(), 'created_at'=>now()])" --delay-at="2025-06-25 16:32:00"
+```
+
+#### 4. Delay External Process
+```bash
+php artisan souldoit:action-delay --action=4 --command="php artisan down" --command-timeout=600 --delay-at="2025-06-25 16:37:50"
+```
+
+**Available Options:**
+- `--action`: Action type (1=Laravel Jobs, 2=Database Query, 3=PHP Code, 4=External Process)
+- `--job`: Job class name (for action=1)
+- `--job-parameter`: Job parameters (for action=1)
+- `--db-query`: SQL query (for action=2)
+- `--php-code`: PHP code to execute (for action=3)
+- `--command`: Command to execute (for action=4)
+- `--command-timeout`: Process timeout in seconds (for action=4, default: 600)
+- `--delay-seconds`: Delay execution by specified number of seconds from current time
+- `--delay-at`: Execution at specific date & time in UTC (format: Y-m-d H:i:s)
+- 
+
+&nbsp;
+&nbsp;
+## Interactive Prompts
 
 #### 1. Delay Laravel Jobs
 ```bash
@@ -133,43 +171,6 @@ php artisan souldoit:action-delay
  What time to execute (in UTC time, format:Y-m-d H:i:s):
  > 2024-06-01 08:30:35
 ```
-
-&nbsp;
-&nbsp;
-## Single-Line Commands (No Prompts)
-
-You can also delay actions using single-line commands without any interactive prompts. This is useful for automation, scripts, or when you want to schedule actions programmatically.
-
-#### 1. Delay Laravel Jobs
-```bash
-php artisan souldoit:action-delay --action=1 --job=\\SoulDoit\\ActionDelay\\Jobs\\ExternalProcessJob --job-parameter="touch newfile.txt" --delay-at="2025-06-25 16:25:00"
-```
-
-#### 2. Delay Database Query
-```bash
-php artisan souldoit:action-delay --action=2 --db-query="INSERT INTO \`users\` (\`username\`,\`email\`,\`first_name\`,\`last_name\`,\`created_at\`,\`updated_at\`) VALUES ('user01','user01@gmail.com','User','One',NOW(),NOW())" --delay-at="2025-06-25 15:51:25"
-```
-
-#### 3. Delay PHP Code
-```bash
-php artisan souldoit:action-delay --action=3 --php-code="\DB::table('users')->insert(['username'=>'user02', 'email'=>'user02@gmail.com', 'first_name'=>'User', 'last_name'=>'Two', 'updated_at'=>now(), 'created_at'=>now()])" --delay-at="2025-06-25 16:32:00"
-```
-
-#### 4. Delay External Process
-```bash
-php artisan souldoit:action-delay --action=4 --command="php artisan down" --command-timeout=600 --delay-at="2025-06-25 16:37:50"
-```
-
-**Available Options:**
-- `--action`: Action type (1=Laravel Jobs, 2=Database Query, 3=PHP Code, 4=External Process)
-- `--job`: Job class name (for action=1)
-- `--job-parameter`: Job parameters (for action=1)
-- `--db-query`: SQL query (for action=2)
-- `--php-code`: PHP code to execute (for action=3)
-- `--command`: Command to execute (for action=4)
-- `--command-timeout`: Process timeout in seconds (for action=4, default: 600)
-- `--delay-seconds`: Delay execution by specified number of seconds from current time
-- `--delay-at`: Execution at specific date & time in UTC (format: Y-m-d H:i:s)
 
 &nbsp;
 &nbsp;
