@@ -140,7 +140,7 @@ class ActionDelayCommand extends Command
 
             $carbonDateTime = Carbon::now()->addSeconds($delaySeconds);
         } else {
-            $datetime_string = !empty($delayTimeCmd) ? $delayTimeCmd : $this->ask("What time to execute (in " . config('app.timezone') . " time, format:Y-m-d H:i:s)");
+            $datetime_string = !empty($delayAtCmd) ? $delayAtCmd : $this->ask("What time to execute (in " . config('app.timezone') . " time, format:Y-m-d H:i:s)");
 
             $validator = Validator::make(['datetime_string' => $datetime_string], [
                 'datetime_string' => ['required', 'date_format:Y-m-d H:i:s'],
